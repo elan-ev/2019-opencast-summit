@@ -12,16 +12,16 @@
 \usepackage{xspace}
 \usepackage{textcomp}
 \usepackage{parskip}
+\usepackage{xcolor}
 
-\hypersetup{colorlinks=true, linkcolor=black, urlcolor=black}
+\hypersetup{colorlinks=true, linkcolor=purple, urlcolor=purple}
 
 \usepackage{libertine}
 \renewcommand*\familydefault{\sfdefault}
 
 \urlstyle{same}
 
-\title{Opencast Releases}
-\date{Dec 12, 2018}
+\title{Crowdfunding}
 \author{
 	Someone (plapadoo) \\
 	Lars Kiesow (ELAN e.V.)
@@ -44,67 +44,30 @@
 
 Last year, \href{https://elan-ev.de}{ELAN e.V.} and
 \href{https://plapadoo.com}{plapadoo} initiated a successful crowdfunding
-initiative for updating and improving some important components of Opencast.
+initiative for updating and improving some components of Opencast.
 
 We saw this as an important task for the future of Opencast as it helps us to
 make some key components work with Java 9+ (something we could not avoid for
-long) as well as improve the performance of Opencast's scheduler.
+long anyway) as well as improve the performance of Opencast's scheduler.
 
 This talk strives to give an overview about how this crowdfunding initiative
 came about and what the current status of the separate goals is. What has been
-updated already? What has changed or or will change at all? How did we approach the tasks?
+updated already? What has changed or or will change at all? How did we approach
+the tasks?
 
 
-\section*{Goal 1: Update Apache Karaf}
+\section*{Update Apache Karaf}
 
-\href{https://karaf.apache.org/}{Apache Karaf} is the OSGI library all of Opencast is based on. It
-provides us with a set of common libraries we can use and which are
-ensured to be secure, up-to-date and work together. To get these
-updated libraries and, arguably more important, to support the new Java
-9, we need an upgrade to \href{https://karaf.apache.org/download.html}{Karaf 4.2.x}.
-
-If the first goal is reached, ELAN e.V. will update Apache Karaf to the
-latest 4.2.x version. This includes updating the library chain, the
-assembly plugin, and our distributions.
+\href{https://karaf.apache.org/}{Apache Karaf} is the OSGI library all of
+Opencast is based on. It provides us with a set of common libraries we can use
+and which are ensured to be secure, up-to-date and work together. To get these
+updated libraries and, arguably more important, to support the new Java 9, we
+need an upgrade to \href{https://karaf.apache.org/download.html}{Karaf 4.2.x}.
 
 
-\section*{Goal 2: Update Elasticsearch}
+\section*{Scheduler Conflict Check Performance}
 
-Opencast is on
-\href{https://www.elastic.co/products/elasticsearch}{Elasticsearch} version
-1.7.6. Again, this does not
-\href{https://www.elastic.co/support/matrix#matrix_jvm}{work with Java 9} and
-is furthermore not supported anymore. This means it will not get any further
-security updates or any other maintenance.
-
-The Opencast community has already discussed in the past that upgrading
-this is highly desirable and something that needs to be done in the
-long run. This is not only for Java 9 compatibility but also as a
-backend for an updated player/portal and to replace the old Solr
-services. It was also one of the most discussed points in the recent
-meetings of Opencast's new high-availability working group
-
-The search indexes are what currently power (and limit!) all of our
-user interfaces. In case of Elasticsearch, its inability to run
-distributed currently makes it a single point of failure. That is a
-problem when you think about highly available systems. To put it
-bluntly: Upgrading Elasticsearch is one of the first steps we need to
-do when thinking about removing the admin node as a single point of
-failure.
-
-The ELAN e.V. will update Elasticsearch to the latest 6.x version and
-integrate it into the Opencast services which require it. This includes
-the admin interface, external API and its companion, the index service.
-
-We will keep in mind the requirements the for high-availability and
-will ensure that Opencast will be able to support stand-alone versions
-of Elasticsearch as well as shipping it's updated internal version for
-smaller installations and ease of installation.
-
-
-\section*{Goal 3: Scheduler Conflict Check Performance}
-
-Opencast allows to schedule recordings using the Administrative User
+Opencast allows to schedule recordings using the administrative user
 interface or the External API. When new events are added, the system
 has to check for conflicts since two events cannot be recorded at the
 same time by the same capture agent.
@@ -124,8 +87,28 @@ conflict checking significantly. This will improve user experience and
 availability on all sizes of Opencast installations.
 
 
-plapadoo will rewrite/improve the scheduler to speed up conflict
-checking by at least 50\% for a picked use case. Remaining funds will be
-used to increase test coverage.
+\section*{Update Elasticsearch}
+
+Opencast is on
+\href{https://www.elastic.co/products/elasticsearch}{Elasticsearch} version
+1.7.6. Again, this does not
+\href{https://www.elastic.co/support/matrix#matrix_jvm}{work with Java 9} and
+is furthermore not supported anymore. This means it will not get any further
+security updates or any other maintenance.
+
+The Opencast community has already discussed in the past that upgrading
+this is highly desirable and something that needs to be done in the
+long run. This is not only for Java~9 compatibility but also as a
+backend for an updated player/portal and to replace the old Solr
+services. It was also one of the most discussed points in the recent
+meetings of Opencast's new high-availability working group
+
+The search indexes are what currently power (and limit!) all of our
+user interfaces. In case of Elasticsearch, its inability to run
+distributed currently makes it a single point of failure. That is a
+problem when you think about highly available systems. To put it
+bluntly: Upgrading Elasticsearch is one of the first steps we need to
+do when thinking about removing the admin node as a single point of
+failure.
 
 \end{document}
