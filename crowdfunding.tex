@@ -1,0 +1,128 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper,twoside,bindingoffset=1cm,top=1in,bottom=1in,right=1.5in,left=1.5in]{geometry}% http://ctan.org/pkg/geometry
+\usepackage{graphicx}
+\usepackage[colorlinks=true, unicode=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage{xspace}
+\usepackage{textcomp}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=black}
+
+\usepackage{libertine}
+\renewcommand*\familydefault{\sfdefault}
+
+\urlstyle{same}
+
+\title{Opencast Releases}
+\date{Dec 12, 2018}
+\author{Lars Kiesow (ELAN e.V.)}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+	Type            & Talk (30min) \\
+	Target Audience & Everyone \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+Last year, \href{https://elan-ev.de}{ELAN e.V.} and
+\href{https://plapadoo.com}{plapadoo} initiated a successful crowdfunding
+initiative for updating and improving some important components of Opencast.
+
+We saw this as an important task for the future of Opencast as it helps us to
+make some key components work with Java 9+ (something we could not avoid for
+long) as well as improve the performance of Opencast's scheduler.
+
+This talk strives to give an overview about how this crowdfunding initiative
+came about and what the current status of the separate goals is. What has been
+updated already? What has changed or or will change at all? How did we approach the tasks?
+
+
+\section*{Goal 1: Update Apache Karaf}
+
+\href{https://karaf.apache.org/}{Apache Karaf} is the OSGI library all of Opencast is based on. It
+provides us with a set of common libraries we can use and which are
+ensured to be secure, up-to-date and work together. To get these
+updated libraries and, arguably more important, to support the new Java
+9, we need an upgrade to \href{https://karaf.apache.org/download.html}{Karaf 4.2.x}.
+
+If the first goal is reached, ELAN e.V. will update Apache Karaf to the
+latest 4.2.x version. This includes updating the library chain, the
+assembly plugin, and our distributions.
+
+
+\section*{Goal 2: Update Elasticsearch}
+
+Opencast is on
+\href{https://www.elastic.co/products/elasticsearch}{Elasticsearch} version
+1.7.6. Again, this does not
+\href{https://www.elastic.co/support/matrix#matrix_jvm}{work with Java 9} and
+is furthermore not supported anymore. This means it will not get any further
+security updates or any other maintenance.
+
+The Opencast community has already discussed in the past that upgrading
+this is highly desirable and something that needs to be done in the
+long run. This is not only for Java 9 compatibility but also as a
+backend for an updated player/portal and to replace the old Solr
+services. It was also one of the most discussed points in the recent
+meetings of Opencast's new high-availability working group
+
+The search indexes are what currently power (and limit!) all of our
+user interfaces. In case of Elasticsearch, its inability to run
+distributed currently makes it a single point of failure. That is a
+problem when you think about highly available systems. To put it
+bluntly: Upgrading Elasticsearch is one of the first steps we need to
+do when thinking about removing the admin node as a single point of
+failure.
+
+The ELAN e.V. will update Elasticsearch to the latest 6.x version and
+integrate it into the Opencast services which require it. This includes
+the admin interface, external API and its companion, the index service.
+
+We will keep in mind the requirements the for high-availability and
+will ensure that Opencast will be able to support stand-alone versions
+of Elasticsearch as well as shipping it's updated internal version for
+smaller installations and ease of installation.
+
+
+\section*{Goal 3: Scheduler Conflict Check Performance}
+
+Opencast allows to schedule recordings using the Administrative User
+interface or the External API. When new events are added, the system
+has to check for conflicts since two events cannot be recorded at the
+same time by the same capture agent.
+
+Due to an architectural flaw, the checks performed by the system are
+currently very slow. The more events and capture agents you have, the
+more complex and slower this check gets. This leads to a slow,
+unresponsive UI on the one hand and can bring the whole system down on
+the other hand, in case someone creates many scheduled events within a
+short period. This can happen by accident or normal usage and
+represents a hidden risk for the availability of your Opencast
+installation.
+
+Changing the underlying data structure requires reworking a fair bit of
+code. With scalability in mind, a new implementation will speed up the
+conflict checking significantly. This will improve user experience and
+availability on all sizes of Opencast installations.
+
+
+plapadoo will rewrite/improve the scheduler to speed up conflict
+checking by at least 50\% for a picked use case. Remaining funds will be
+used to increase test coverage.
+
+\end{document}
