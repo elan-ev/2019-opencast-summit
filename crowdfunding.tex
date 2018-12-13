@@ -44,19 +44,20 @@
 
 Last year, \href{https://elan-ev.de}{ELAN e.V.} and
 \href{https://plapadoo.com}{plapadoo} initiated a successful crowdfunding
-initiative for updating and improving some components of Opencast.
+initiative for updating and improving core elements of Opencast.
 
 We saw this as an important task for the future of Opencast as it helps us to
 make some key components work with Java 9+ (something we could not avoid for
-long anyway) as well as improve the performance of Opencast's scheduler.
+long anyway) as well as improve the performance and ensure scalability of
+Opencast's scheduler.
 
 This talk strives to give an overview about how this crowdfunding initiative
 came about and what the current status of the separate goals is. What has been
-updated already? What has changed or or will change at all? How did we approach
+updated already? What has changed or will change at all? How did we approach
 the tasks?
 
 This talk will not go into any technical details. If you are interested in
-that, please join the sessions in the technical track instead.
+that, look out for related sessions in the technical track.
 
 
 \section*{Update Apache Karaf}
@@ -64,16 +65,16 @@ that, please join the sessions in the technical track instead.
 \href{https://karaf.apache.org/}{Apache Karaf} is the OSGI library all of
 Opencast is based on. It provides us with a set of common libraries we can use
 and which are ensured to be secure, up-to-date and work together. To get these
-updated libraries and, arguably more important, to support the new Java 9, we
+updated libraries and, arguably more important, to support Java 9, we
 need an upgrade to \href{https://karaf.apache.org/download.html}{Karaf 4.2.x}.
 
 
 \section*{Scheduler Conflict Check Performance}
 
-Opencast allows to schedule recordings using the administrative user
-interface or the External API. When new events are added, the system
-has to check for conflicts since two events cannot be recorded at the
-same time by the same capture agent.
+Opencast allows to schedule recordings using the Administrative User Interface
+(Admin UI) or the External API. When new events are added, the system has to
+check for conflicts since two events cannot be recorded at the same time by the
+same capture agent.
 
 Due to an architectural flaw, the checks performed by the system are
 currently very slow. The more events and capture agents you have, the
@@ -96,15 +97,15 @@ Opencast is on
 \href{https://www.elastic.co/products/elasticsearch}{Elasticsearch} version
 1.7.6. Again, this does not
 \href{https://www.elastic.co/support/matrix#matrix_jvm}{work with Java 9} and
-is furthermore not supported anymore. This means it will not get any further
+is furthermore not supported anymore. This means it will not get any future
 security updates or any other maintenance.
 
-The Opencast community has already discussed in the past that upgrading
+The Opencast community has already discussed that upgrading
 this is highly desirable and something that needs to be done in the
-long run. This is not only for Java~9 compatibility but also as a
+long run. This not only ensures Java~9 compatibility but also serves as a
 backend for an updated player/portal and to replace the old Solr
 services. It was also one of the most discussed points in the recent
-meetings of Opencast's new high-availability working group
+meetings of Opencast's new high-availability working group.
 
 The search indexes are what currently power (and limit!) all of our
 user interfaces. In case of Elasticsearch, its inability to run
