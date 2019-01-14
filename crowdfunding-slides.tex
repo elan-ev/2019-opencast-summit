@@ -1,0 +1,76 @@
+\documentclass[t,aspectratio=169]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{tabu}
+
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[text line]{%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=2.25ex, dp=1ex]{section in head/foot}
+    \usebeamerfont{author in head/foot}
+    \begin{tabu} to \paperwidth{X[l]X[c]X[r]}
+      \insertinstitute&\inserttitle&\insertpagenumber
+    \end{tabu}
+  \end{beamercolorbox}
+}
+
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand*\sfdefault{phv}
+
+\definecolor{elan-orange}{RGB}{223,122,13}
+\definecolor{opencast-blue}{RGB}{36,66,93}
+\definecolor{opencast-green}{RGB}{75,176,123}
+\definecolor{grey}{RGB}{200,200,200}
+\setbeamercolor{structure}{fg=opencast-green, bg=opencast-blue}
+\setbeamercolor{frametitle}{fg=white, bg=opencast-blue}
+\setbeamercolor{title}{fg=white, bg=opencast-blue}
+\setbeamercolor{section in head/foot}{fg=black, bg=grey}
+\setbeamertemplate{itemize items}[circle]
+
+
+\title{Crowdfunding}
+\subtitle{it works!!}
+\author{Lars Kiesow (ELAN e.V.)\\\vspace{1em}Michael Stypa (plapadoo)}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+  \includegraphics[width=7em]{plapadoo.pdf}
+  \hfill
+  \includegraphics[width=7em]{opencast.pdf}
+  \hfill
+  \includegraphics[width=7em]{elan.pdf}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{why}
+  \begin{itemize}
+    \item most code changes fix bugs or add features
+    \item big changes to opencast made the core colorfull over time
+    \item as long as its working nobody wants to change the core
+    \item core changes are big
+    \item the bigger the jump when updating the harder it is
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]
+  %TODO should we show the institutions logos here?
+  \frametitle{crowd funding 2018}
+  \begin{itemize}
+    \item X supporting institutions made it possible
+    \item special thanks to ugent, uni-koeln, uct, eth, harvard
+  \end{itemize}
+  \begin{itemize}
+    \item performed necessary updates to karaf and java
+    \item sped up one of the biggest performance sinks (scheduler)
+  \end{itemize}
+\end{frame}
+
+%\begin{frame}[c]
+  %\frametitle{}
+  %\begin{itemize}
+    %\item 
+  %\end{itemize}
+%\end{frame}
+\end{document}
