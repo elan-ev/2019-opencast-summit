@@ -1,4 +1,5 @@
-\documentclass[t,aspectratio=169]{beamer}
+%\documentclass[t,aspectratio=169]{beamer}
+\documentclass[t,aspectratio=43]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -46,9 +47,9 @@
 \begin{frame}[c]
   \frametitle{What is crowdfunding?}
   \begin{itemize}
-    \item Getting money for some tasks is hard to justify
     \item Some tasks are too expensive for a single institution to fund
-    \item Solution: Multiple institutions combine the available funds to reach the goal
+    \item Getting money for backend work is hard
+    \item Solution: Combine available money from a crowd of institutions to fund the goal
   \end{itemize}
 \end{frame}
 
@@ -56,10 +57,20 @@
   \frametitle{Why does opencast need crowdfunding?}
   \begin{itemize}
     \item Most code changes fix bugs or add features but don't rework things
-    \item Many big changes to opencast made the core colorful over time
-    \item As long as its working, nobody wants to change the core
-    \item Core changes are big
+    \item Many big changes made the backend rather colorful over time
+    \item As long as its working, nobody wants to change the backend
+    \item Backend changes are big changes
     \item The bigger the jump when updating the harder it is
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{How does it work?}
+  \begin{itemize}
+    \item Proposals on list that describe a task and estimate the cost
+    \item Institutions send a mail telling the coordinator how much they are willing to contribute to which task
+    \item Coordinator informs on list about progress reaching the estimated cost of tasks
+    \item Successfull funded tasks get implemented and merged into upstream
   \end{itemize}
 \end{frame}
 
